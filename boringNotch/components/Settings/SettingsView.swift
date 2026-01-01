@@ -51,6 +51,9 @@ struct SettingsView: View {
                 NavigationLink(value: "Shelf") {
                     Label("Shelf", systemImage: "books.vertical")
                 }
+                NavigationLink(value: "Timer") {
+                    Label("Timer", systemImage: "timer")
+                }
                 NavigationLink(value: "Shortcuts") {
                     Label("Shortcuts", systemImage: "keyboard")
                 }
@@ -85,6 +88,8 @@ struct SettingsView: View {
                     Charge()
                 case "Shelf":
                     Shelf()
+                case "Timer":
+                    TimerSettings()
                 case "Shortcuts":
                     Shortcuts()
                 case "Extensions":
@@ -269,7 +274,7 @@ struct GeneralSettings: View {
             }
             .controlSize(.extraLarge)
         }
-        .accentColor(.effectiveAccent)
+        .accentColor(.accentColor)
         .navigationTitle("General")
         .onChange(of: openNotchOnHover) {
             if !openNotchOnHover {
@@ -1796,4 +1801,261 @@ func warningBadge(_ text: String, _ description: String) -> some View {
 
 #Preview {
     HUD()
+}
+
+struct TimerSettings: View {
+    @Default(.timerPresets) private var timerPresets
+    @Default(.timerDisplayMode) private var timerDisplayMode
+    @Default(.timerShowsCountdown) private var showsCountdown
+    @Default(.timerShowsProgress) private var showsProgress
+    @Default(.timerShowsLabel) private var showsLabel
+    @Default(.timerProgressStyle) private var progressStyle
+    @Default(.timerControlWindowEnabled) private var controlWindowEnabled
+    @Default(.showTimerPresetsInNotchTab) private var showTimerPresetsInNotchTab
+    
+    @State private var isAddingPreset = false
+    @State private var editingPreset: TimerPreset?
+    @State private var showPresetEditor = false
+    
+    var body: some View {
+        Form {
+            Section {
+                Toggle("Show Countdown", isOn: $showsCountdown)
+                Toggle("Show Progress", isOn: $showsProgress)
+                Toggle("Show Label", isOn: $showsLabel)
+                
+                if showsProgress {
+                    Picker("Progress Style", selection: $progressStyle) {
+                        ForEach(TimerProgressStyle.allCases) {
+                            Text($0.displayName)
+                                .tag($0)
+                        }
+                    }
+                }
+            } header: {
+                Text("Display Options")
+            }
+            
+            Section {
+                ForEach(timerPresets) { preset in
+                    HStack(spacing: 12) {
+                        Circle()
+                            .fill(preset.color.gradient)
+                            .frame(width: 24, height: 24)
+                            
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(preset.name)
+                                .font(.system(size: 13, weight: .medium))
+                            Text(preset.formattedDuration)
+                                .font(.caption.monospaced())
+                                .foregroundStyle(.secondary)
+                        }
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            editingPreset = preset
+                            showPresetEditor = true
+                        }) {
+                            Image(systemName: "pencil")
+                                .foregroundStyle(.secondary)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .padding(.vertical, 6)
+                }
+                
+                Button(action: {
+                    editingPreset = nil
+                    showPresetEditor = true
+                }) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundStyle(Color.accentColor)
+                        Text("Add Preset")
+                    }
+                }
+                .buttonStyle(.plain)
+                .padding(.vertical, 8)
+            } header: {
+                Text("Timer Presets")
+            } footer: {
+                Text("Presets allow you to quickly start timers with predefined durations.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .sheet(isPresented: $showPresetEditor, onDismiss: { editingPreset = nil }) {
+            TimerPresetEditor(
+                preset: $editingPreset,
+                presets: $timerPresets,
+                onSave: { newPreset in
+                    if let existingIndex = timerPresets.firstIndex(where: { $0.id == newPreset.id }) {
+                        timerPresets[existingIndex] = newPreset
+                    } else {
+                        timerPresets.append(newPreset)
+                    }
+                },
+                onDelete: { preset in
+                    if let index = timerPresets.firstIndex(where: { $0.id == preset.id }) {
+                        timerPresets.remove(at: index)
+                    }
+                }
+            )
+        }
+        .navigationTitle("Timer")
+    }
+}
+
+struct TimerPresetEditor: View {
+    @Binding var preset: TimerPreset?
+    @Binding var presets: [TimerPreset]
+    let onSave: (TimerPreset) -> Void
+    let onDelete: (TimerPreset) -> Void
+    @Environment(\.dismiss) private var dismiss
+    
+    @State private var name: String
+    @State private var duration: TimeInterval
+    @State private var color: Color
+    
+    init(
+        preset: Binding<TimerPreset?>,
+        presets: Binding<[TimerPreset]>,
+        onSave: @escaping (TimerPreset) -> Void,
+        onDelete: @escaping (TimerPreset) -> Void
+    ) {
+        _preset = preset
+        _presets = presets
+        self.onSave = onSave
+        self.onDelete = onDelete
+        
+        if let initialPreset = preset.wrappedValue {
+            _name = State(initialValue: initialPreset.name)
+            _duration = State(initialValue: initialPreset.duration)
+            _color = State(initialValue: initialPreset.color)
+        } else {
+            _name = State(initialValue: "New Preset")
+            _duration = State(initialValue: 600) // 10 minutes
+            _color = State(initialValue: Color.orange)
+        }
+    }
+    
+    private var isEditing: Bool {
+        preset != nil
+    }
+    
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    TextField("Name", text: $name)
+                    
+                    DurationPicker(duration: $duration)
+                    
+                    ColorPicker("Color", selection: $color)
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        // 修复Cancel按钮，关闭弹窗
+                        preset = nil
+                        dismiss() // 直接关闭弹窗
+                    }
+                }
+                
+                ToolbarItem(placement: .destructiveAction) {
+                    if isEditing {
+                        Button("Delete") {
+                            if let currentPreset = preset {
+                                onDelete(currentPreset)
+                                preset = nil
+                                dismiss() // 删除后关闭弹窗
+                            }
+                        }
+                        .foregroundStyle(.red)
+                    }
+                }
+                
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") {
+                        let newPreset = TimerPreset(
+                            id: preset?.id ?? UUID(),
+                            name: name,
+                            duration: duration,
+                            color: color
+                        )
+                        onSave(newPreset)
+                        preset = nil
+                        dismiss() // 保存后关闭弹窗
+                    }
+                }
+            }
+            .navigationTitle(isEditing ? "Edit Preset" : "Add Preset")
+        }
+        .frame(width: 400, height: 300)
+    }
+}
+
+struct DurationPicker: View {
+    @Binding var duration: TimeInterval
+    
+    @State private var hours: Int
+    @State private var minutes: Int
+    @State private var seconds: Int
+    
+    init(duration: Binding<TimeInterval>) {
+        _duration = duration
+        let components = TimerPreset.components(for: duration.wrappedValue)
+        _hours = State(initialValue: components.hours)
+        _minutes = State(initialValue: components.minutes)
+        _seconds = State(initialValue: components.seconds)
+    }
+    
+    var body: some View {
+        Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 8) {
+            GridRow {
+                DurationStepper(title: "Hours", value: $hours, range: 0...23)
+                DurationStepper(title: "Minutes", value: $minutes, range: 0...59)
+                DurationStepper(title: "Seconds", value: $seconds, range: 0...59)
+            }
+        }
+        .onChange(of: hours) { updateDuration() }
+        .onChange(of: minutes) { updateDuration() }
+        .onChange(of: seconds) { updateDuration() }
+    }
+    
+    private func updateDuration() {
+        duration = TimeInterval(hours * 3600 + minutes * 60 + seconds)
+    }
+}
+
+struct DurationStepper: View {
+    let title: String
+    @Binding var value: Int
+    let range: ClosedRange<Int>
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(title)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            
+            TextField("", text: binding)
+                .font(.system(size: 14, weight: .semibold, design: .monospaced))
+                .multilineTextAlignment(.center)
+                .textFieldStyle(.roundedBorder)
+        }
+    }
+    
+    private var binding: Binding<String> {
+        Binding<String>(
+            get: { String(value) },
+            set: { newValue in
+                let digits = newValue.filter { $0.isNumber }
+                let number = min(max(range.lowerBound, Int(digits) ?? 0), range.upperBound)
+                value = number
+            }
+        )
+    }
 }

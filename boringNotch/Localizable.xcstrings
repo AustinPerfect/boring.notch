@@ -201,6 +201,9 @@
         }
       }
     },
+    ":" : {
+
+    },
     "'Now Playing' was the only option on previous versions and works with all media apps." : {
       "localizations" : {
         "ar" : {
@@ -1301,6 +1304,9 @@
         }
       }
     },
+    "00" : {
+
+    },
     "About" : {
       "localizations" : {
         "ar" : {
@@ -2001,6 +2007,9 @@
           }
         }
       }
+    },
+    "Add Preset" : {
+
     },
     "Additional features" : {
       "localizations" : {
@@ -5602,6 +5611,9 @@
         }
       }
     },
+    "Color" : {
+
+    },
     "Color Presets" : {
       "localizations" : {
         "ar" : {
@@ -5901,6 +5913,12 @@
           }
         }
       }
+    },
+    "Configure presets in Settings" : {
+
+    },
+    "Configure presets in Settings to see them here." : {
+
     },
     "Continue" : {
       "localizations" : {
@@ -6702,6 +6720,9 @@
         }
       }
     },
+    "Custom Timer" : {
+
+    },
     "Custom vizualizers (Lottie)" : {
       "localizations" : {
         "ar" : {
@@ -7102,6 +7123,9 @@
         }
       }
     },
+    "Delete" : {
+
+    },
     "Description" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -7404,6 +7428,9 @@
           }
         }
       }
+    },
+    "Display Options" : {
+
     },
     "Download" : {
       "localizations" : {
@@ -8106,6 +8133,9 @@
         }
       }
     },
+    "Edit Preset" : {
+
+    },
     "Enable blur effect behind album art" : {
       "localizations" : {
         "ar" : {
@@ -8806,6 +8836,9 @@
           }
         }
       }
+    },
+    "Enable the timer feature in Settings to access this tab." : {
+
     },
     "Enable window shadow" : {
       "localizations" : {
@@ -16110,6 +16143,12 @@
         }
       }
     },
+    "Overtime" : {
+
+    },
+    "Pause" : {
+
+    },
     "Pick a Color" : {
       "localizations" : {
         "ar" : {
@@ -16410,6 +16449,12 @@
         }
       }
     },
+    "Presets" : {
+
+    },
+    "Presets allow you to quickly start timers with predefined durations." : {
+
+    },
     "Progress bar style" : {
       "localizations" : {
         "ar" : {
@@ -16509,6 +16554,9 @@
           }
         }
       }
+    },
+    "Progress Style" : {
+
     },
     "Quick Share" : {
       "localizations" : {
@@ -17710,6 +17758,9 @@
         }
       }
     },
+    "Reset" : {
+
+    },
     "Reset to Defaults" : {
       "localizations" : {
         "ar" : {
@@ -18011,6 +18062,9 @@
         }
       }
     },
+    "Resume" : {
+
+    },
     "Running" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -18111,6 +18165,9 @@
           }
         }
       }
+    },
+    "Save" : {
+
     },
     "Select the music source you want to use. You can change this later in the app settings." : {
       "localizations" : {
@@ -19112,6 +19169,9 @@
         }
       }
     },
+    "Show Countdown" : {
+
+    },
     "Show HUD in open notch" : {
       "localizations" : {
         "ar" : {
@@ -19211,6 +19271,9 @@
           }
         }
       }
+    },
+    "Show Label" : {
+
     },
     "Show lyrics below artist name" : {
       "localizations" : {
@@ -20012,6 +20075,9 @@
         }
       }
     },
+    "Show Progress" : {
+
+    },
     "Show settings icon in notch" : {
       "localizations" : {
         "ar" : {
@@ -20812,6 +20878,15 @@
         }
       }
     },
+    "Start" : {
+
+    },
+    "Start Custom Timer" : {
+
+    },
+    "Stop" : {
+
+    },
     "Stopped" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -21313,6 +21388,15 @@
           }
         }
       }
+    },
+    "Timer" : {
+
+    },
+    "Timer Disabled" : {
+
+    },
+    "Timer Presets" : {
+
     },
     "Tint progress bar with accent color" : {
       "localizations" : {

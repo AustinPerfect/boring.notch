@@ -25,6 +25,40 @@ struct CustomVisualizer: Codable, Hashable, Equatable, Defaults.Serializable {
     var speed: CGFloat = 1.0
 }
 
+// Timer progress style options
+enum TimerProgressStyle: String, CaseIterable, Defaults.Serializable, Identifiable {
+    case bar
+    case ring
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .bar:
+            return "Bar"
+        case .ring:
+            return "Ring"
+        }
+    }
+}
+
+// Timer icon color mode options
+enum TimerIconColorMode: String, CaseIterable, Defaults.Serializable, Identifiable {
+    case adaptive
+    case solid
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .adaptive:
+            return "Adaptive"
+        case .solid:
+            return "Solid"
+        }
+    }
+}
+
 enum CalendarSelectionState: Codable, Defaults.Serializable {
     case all
     case selected(Set<String>)
@@ -168,8 +202,8 @@ extension Defaults.Keys {
     static let shelfTapToOpen = Key<Bool>("shelfTapToOpen", default: true)
     static let quickShareProvider = Key<String>("quickShareProvider", default: QuickShareProvider.defaultProvider.id)
     static let copyOnDrag = Key<Bool>("copyOnDrag", default: false)
-    static let autoRemoveShelfItems = Key<Bool>("autoRemoveShelfItems", default: false)
     static let expandedDragDetection = Key<Bool>("expandedDragDetection", default: true)
+    static let autoRemoveShelfItems = Key<Bool>("autoRemoveShelfItems", default: false)
     
     // MARK: Calendar
     static let calendarSelectionState = Key<CalendarSelectionState>("calendarSelectionState", default: .all)
@@ -198,5 +232,17 @@ extension Defaults.Keys {
         }
     }
 
+    // MARK: Timer
+    static let timerPresets = Key<[TimerPreset]>("timerPresets", default: TimerPreset.defaultPresets)
+    static let enableTimerFeature = Key<Bool>("enableTimerFeature", default: true)
+    static let timerDisplayMode = Key<TimerDisplayMode>("timerDisplayMode", default: .tab)
+    static let timerIconColorMode = Key<TimerIconColorMode>("timerIconColorMode", default: .adaptive)
+    static let timerSolidColor = Key<Color>("timerSolidColor", default: .accentColor)
+    static let timerShowsProgress = Key<Bool>("timerShowsProgress", default: true)
+    static let timerProgressStyle = Key<TimerProgressStyle>("timerProgressStyle", default: .bar)
+    static let timerShowsCountdown = Key<Bool>("timerShowsCountdown", default: true)
+    static let timerShowsLabel = Key<Bool>("timerShowsLabel", default: true)
+    static let timerControlWindowEnabled = Key<Bool>("timerControlWindowEnabled", default: true)
+    static let showTimerPresetsInNotchTab = Key<Bool>("showTimerPresetsInNotchTab", default: true)
     static let didClearLegacyURLCacheV1 = Key<Bool>("didClearLegacyURLCache_v1", default: false)
 }
