@@ -189,7 +189,9 @@ struct ContentView: View {
                     .sensoryFeedback(.alignment, trigger: haptics)
                     .contextMenu {
                         Button("Settings") {
-                            SettingsWindowController.shared.showWindow()
+                            DispatchQueue.main.async {
+                                SettingsWindowController.shared.showWindow()
+                            }
                         }
                         .keyboardShortcut(KeyEquivalent(","), modifiers: .command)
                         //                    Button("Edit") { // Doesnt work....
