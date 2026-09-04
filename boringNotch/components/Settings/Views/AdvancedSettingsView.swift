@@ -177,6 +177,10 @@ struct Advanced: View {
                 Defaults.Toggle(key: .showOnLockScreen) {
                     Text("Show notch on lock screen")
                 }
+                Defaults.Toggle(key: .enableLockScreenMediaWidget) {
+                    Text("Show media widget on lock screen")
+                }
+                .disabled(!showOnLockScreen)
                 Defaults.Toggle(key: .hideFromScreenRecording) {
                     Text("Hide from screen recording")
                 }
