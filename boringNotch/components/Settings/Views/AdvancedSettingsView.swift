@@ -186,6 +186,8 @@ struct Advanced: View {
             } header: {
                 Text("Window Behavior")
             }
+
+            LockScreenFocusSettings()
             
             Section {
                 Defaults.Toggle(key: .normalizeGestureDirection) {

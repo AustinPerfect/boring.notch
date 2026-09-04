@@ -245,6 +245,9 @@ extension Defaults.Keys {
     static let notchHeight = Key<CGFloat>("notchHeight", default: 32)
     //static let openLastTabByDefault = Key<Bool>("openLastTabByDefault", default: false)
     static let showOnLockScreen = Key<Bool>("showOnLockScreen", default: false)
+    static let enableLockScreenFocusWidget = Key<Bool>("enableLockScreenFocusWidget", default: false)
+    static let lockScreenFocusActive = Key<Bool>("lockScreenFocusActive", default: false)
+    static let lockScreenFocusName = Key<String>("lockScreenFocusName", default: "Focus")
     static let hideFromScreenRecording = Key<Bool>("hideFromScreenRecording", default: false)
     
     // MARK: Appearance
