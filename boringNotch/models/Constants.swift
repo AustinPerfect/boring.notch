@@ -245,6 +245,11 @@ extension Defaults.Keys {
     static let notchHeight = Key<CGFloat>("notchHeight", default: 32)
     //static let openLastTabByDefault = Key<Bool>("openLastTabByDefault", default: false)
     static let showOnLockScreen = Key<Bool>("showOnLockScreen", default: false)
+    static let enableLockScreenWeatherWidget = Key<Bool>("enableLockScreenWeatherWidget", default: false)
+    static let lockScreenTemperatureUnit = Key<LockScreenTemperatureUnit>(
+        "lockScreenTemperatureUnit", default: .celsius
+    )
+    static let lockScreenWeatherShowsLocation = Key<Bool>("lockScreenWeatherShowsLocation", default: true)
     static let hideFromScreenRecording = Key<Bool>("hideFromScreenRecording", default: false)
     
     // MARK: Appearance

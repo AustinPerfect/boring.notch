@@ -186,6 +186,8 @@ struct Advanced: View {
             } header: {
                 Text("Window Behavior")
             }
+
+            LockScreenWeatherSettings()
             
             Section {
                 Defaults.Toggle(key: .normalizeGestureDirection) {
