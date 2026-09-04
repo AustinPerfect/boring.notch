@@ -121,6 +121,7 @@
 		14D570C92C5F38890011E668 /* BoringViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D570C82C5F38890011E668 /* BoringViewModel.swift */; };
 		C0D300012F60000100000001 /* DropInteractionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D300022F60000100000001 /* DropInteractionState.swift */; };
 		C0D301012F70000100000001 /* LockScreenWidgetContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D301022F70000100000001 /* LockScreenWidgetContainer.swift */; };
+		C0D303012F70000100000001 /* LockScreenReminderWidgetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D303022F70000100000001 /* LockScreenReminderWidgetManager.swift */; };
 		14D570CB2C5F4B2C0011E668 /* BatteryStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D570CA2C5F4B2C0011E668 /* BatteryStatusViewModel.swift */; };
 		14D570CD2C5F4BB70011E668 /* BoringBattery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D570CC2C5F4BB70011E668 /* BoringBattery.swift */; };
 		14D570D22C5F6C6A0011E668 /* BoringExtrasMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D570D12C5F6C6A0011E668 /* BoringExtrasMenu.swift */; };
@@ -318,6 +319,7 @@
 		14D570C82C5F38890011E668 /* BoringViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoringViewModel.swift; sourceTree = "<group>"; };
 		C0D300022F60000100000001 /* DropInteractionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropInteractionState.swift; sourceTree = "<group>"; };
 		C0D301022F70000100000001 /* LockScreenWidgetContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenWidgetContainer.swift; sourceTree = "<group>"; };
+		C0D303022F70000100000001 /* LockScreenReminderWidgetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenReminderWidgetManager.swift; sourceTree = "<group>"; };
 		14D570CA2C5F4B2C0011E668 /* BatteryStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryStatusViewModel.swift; sourceTree = "<group>"; };
 		14D570CC2C5F4BB70011E668 /* BoringBattery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoringBattery.swift; sourceTree = "<group>"; };
 		14D570D12C5F6C6A0011E668 /* BoringExtrasMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoringExtrasMenu.swift; sourceTree = "<group>"; };
@@ -643,6 +645,7 @@
 				112FB7342CCF16F70015238C /* NotchSpaceManager.swift */,
 				147163992C5D35FF0068B555 /* MusicManager.swift */,
 				C0D301022F70000100000001 /* LockScreenWidgetContainer.swift */,
+				C0D303022F70000100000001 /* LockScreenReminderWidgetManager.swift */,
 				F1F2A0A200000000000000F2 /* AudioCaptureManager.swift */,
 				149E0B962C737D00006418B1 /* WebcamManager.swift */,
 				14C08BB52C8DE42D000F8AA0 /* CalendarManager.swift */,
@@ -1128,6 +1131,7 @@
 				14D570C92C5F38890011E668 /* BoringViewModel.swift in Sources */,
 				C0D300012F60000100000001 /* DropInteractionState.swift in Sources */,
 				C0D301012F70000100000001 /* LockScreenWidgetContainer.swift in Sources */,
+				C0D303012F70000100000001 /* LockScreenReminderWidgetManager.swift in Sources */,
 				14D570BC2C5E98EB0011E668 /* generic.swift in Sources */,
 				118EBE272E92DE8400D54B5A /* NSMenu+AssociatedObject.swift in Sources */,
 				B1CE8CFE2C6F659400DD9871 /* KeyboardShortcutsHelper.swift in Sources */,
