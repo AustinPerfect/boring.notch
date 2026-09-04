@@ -186,6 +186,8 @@ struct Advanced: View {
             } header: {
                 Text("Window Behavior")
             }
+
+            LockScreenTimerSettings()
             
             Section {
                 Defaults.Toggle(key: .normalizeGestureDirection) {
